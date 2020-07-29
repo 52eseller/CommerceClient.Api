@@ -7,9 +7,9 @@
     <Company>fiftytwo.com</Company>
     <PackageId>CommerceClient.Api</PackageId>
     <Product>52eESELLER api client</Product>
-    <Description>Provides models, methods and extensions for accessing 52eESELLER cloud web shops using v3 api.
+    <Description>Provides models, methods and extensions for accessing 52ESELLER cloud web shops using v3 api.
 
-The package provides a fast and convenient building block for developing applications centered around the web shop.
+The package provides a fast and convenient building block for developing applications centered around the 52ESELLER cloud web shop engine.
 
 Namespaces included:
 - CommerceClient.Api.Model
@@ -18,7 +18,7 @@ Namespaces included:
 </Description>
     <Copyright>fiftytwo.com</Copyright>
     <PackageTags>fiftytwo, ecommerce, eSeller Cloud, 52eESELLER</PackageTags>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/flemmingrothmann/CommerceClient.Api</PackageProjectUrl>

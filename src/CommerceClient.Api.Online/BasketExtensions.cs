@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using CommerceClient.Api.Model;
 using CommerceClient.Api.Model.RequestModels;
+using CommerceClient.Api.Model.RequestModels.Basket;
+using CommerceClient.Api.Model.ResponseModels;
 using RestSharp;
 
 namespace CommerceClient.Api.Online
@@ -270,6 +272,23 @@ namespace CommerceClient.Api.Online
             return response.Data.Items;
         }
 
+        public static NoContentResponse DeleteBasket(this Connection conn, IClientState state, int basketId)
+        {
+            var restRequest = new RestRequest(string.Format("{0}/{1}", "/services/v3/baskets", basketId))
+            {
+                Method = Method.DELETE
+            };
+
+
+            var (_, response) = conn.Execute<NoContentResponse>(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+
+            return response;
+        }
+
         public static void UpdateSellTo(
             this Connection conn,
             IClientState state,
@@ -294,5 +313,116 @@ namespace CommerceClient.Api.Online
                 Includes.Auth
             );
         }
+
+        public static void UpdateShipTo(this Connection conn,
+                                        IClientState state,
+                                        int basketId,
+                                        AddressShipToRequest shipToRequest)
+        {
+            var restRequest = shipToRequest.CreateRestRequestJson(
+                    Method.PUT,
+                    "/services/v3/baskets/{basketId}/shipto"
+                )
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                );
+
+
+            conn.ExecuteNonQuery(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+        }
+
+        public static void UpdateBasketAnnotation(this Connection conn,
+                                IClientState state,
+                                int basketId,
+                                 BasketAnnotationRequest annotation)
+        {
+            var restRequest = annotation.CreateRestRequestJson(
+                    Method.PUT,
+                    "/services/v3/baskets/{basketId}/annotation"
+                )
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                );
+
+
+            conn.ExecuteNonQuery(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+        }
+
+        public static void MergeBasket(this Connection conn,
+                         IClientState state,
+                         int basketId,
+                          BasketMergeRequest basketMergeRequest)
+        {
+            var restRequest = basketMergeRequest.CreateRestRequestJson(
+                    Method.POST,
+                    "/services/v3/baskets/{basketId}/merge"
+                )
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                );
+
+
+            conn.ExecuteNonQuery(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+        }
+        public static void DeleteAllBasketUserValue(this Connection conn,
+                         IClientState state,
+                         int basketId, string uservaluekey)
+        {
+            var restRequest =new RestRequest("/services/v3/baskets/{basketId}/uservalues/{uservaluekey}",Method.DELETE)
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                ).AddParameter(
+                    "uservaluekey",
+                    uservaluekey,
+                    ParameterType.UrlSegment
+                );
+
+
+            conn.ExecuteNonQuery(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+        }
+
+        public static void CheckoutBasket(this Connection conn,
+                 IClientState state,
+                 int basketId)
+        {
+            var restRequest = new RestRequest("/services/v3/baskets/{basketId}/checkout", Method.POST)
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                );
+
+
+            conn.ExecuteNonQuery(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+        }
     }
+    
 }

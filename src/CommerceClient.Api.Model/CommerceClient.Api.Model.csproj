@@ -52,4 +52,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="protobuf-net">
+      <Version>3.0.29</Version>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>

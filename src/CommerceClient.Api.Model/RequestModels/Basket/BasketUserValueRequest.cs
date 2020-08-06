@@ -1,4 +1,4 @@
-﻿namespace CommerceClient.Api.Model.RequestModels
+﻿namespace CommerceClient.Api.Model.RequestModels.Basket
 {
     public class BasketUserValueRequest
     {

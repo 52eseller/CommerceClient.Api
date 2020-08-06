@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CommerceClient.Api.Model.RequestModels
+namespace CommerceClient.Api.Model.RequestModels.Basket
 {
     /// <summary>
     /// Json model for pushing sell-to-address.

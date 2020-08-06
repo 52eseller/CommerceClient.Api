@@ -1,8 +1,5 @@
 ﻿using CommerceClient.Api.Model.Misc;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
 
 namespace CommerceClient.Api.Model.RequestModels.Basket
 {
@@ -26,7 +23,7 @@ namespace CommerceClient.Api.Model.RequestModels.Basket
             }
         }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public bool CommentIsSet { get; set; }
 
         private string _BasketName;
@@ -46,7 +43,7 @@ namespace CommerceClient.Api.Model.RequestModels.Basket
             }
         }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public bool BasketNameIsSet { get; set; }
 
 
@@ -66,7 +63,7 @@ namespace CommerceClient.Api.Model.RequestModels.Basket
             }
         }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public bool DeliveryDateIsSet { get; set; }
     }
 }

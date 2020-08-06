@@ -16,7 +16,8 @@ namespace CommerceClient.Api.Coverage
             Console.Write("Hit return to start.");
             Console.ReadLine();
             int basketId = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings.Get("basketId"));
-            new BasketCoverage().DeleteBasket(basketId);
+            //new BasketCoverage().DeleteBasket(basketId);
+            new BasketCoverage().CheckoutBasket(basketId);
             //new BasketCoverage().CreateNewBasket();
             //var cnn = new Connection(System.Configuration.ConfigurationManager.AppSettings.Get("hostname"))
             //{

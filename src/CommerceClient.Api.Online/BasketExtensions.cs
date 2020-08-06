@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CommerceClient.Api.Model;
+using CommerceClient.Api.Model.Misc;
 using CommerceClient.Api.Model.RequestModels;
 using CommerceClient.Api.Model.RequestModels.Basket;
 using CommerceClient.Api.Model.ResponseModels;
@@ -360,7 +361,7 @@ namespace CommerceClient.Api.Online
             );
         }
 
-        public static void MergeBasket(this Connection conn,
+        public static List<ValidationMessageResponse> MergeBasket(this Connection conn,
                          IClientState state,
                          int basketId,
                           BasketMergeRequest basketMergeRequest)
@@ -376,11 +377,12 @@ namespace CommerceClient.Api.Online
                 );
 
 
-            conn.ExecuteNonQuery(
+            var (_, response) = conn.Execute<List<ValidationMessageResponse>>(
                 restRequest,
                 state,
                 Includes.Auth
             );
+            return response;
         }
         public static void DeleteAllBasketUserValue(this Connection conn,
                          IClientState state,
@@ -415,6 +417,85 @@ namespace CommerceClient.Api.Online
                     basketId,
                     ParameterType.UrlSegment
                 );
+
+            conn.ExecuteNonQuery(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+        }
+
+        public static void TakeBasketOwnerShip(this Connection conn,
+                 IClientState state,
+                 int basketId)
+        {
+            var restRequest = new RestRequest("/services/v3/baskets/{basketId}/takeownership", Method.PUT)
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                );
+
+
+            conn.ExecuteNonQuery(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+        }
+
+        public static void RemoveCoupons(this Connection conn,
+         IClientState state,
+         int basketId)
+        {
+            var restRequest = new RestRequest("/services/v3/baskets/{basketId}/coupons", Method.DELETE)
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                );
+
+
+            conn.ExecuteNonQuery(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+        }
+
+        public static void RemoveCoupon(this Connection conn,
+        IClientState state, int basketId, string couponId)
+        {
+            var restRequest = new RestRequest("/services/v3/baskets/{basketId}/coupons/{couponid}", Method.DELETE)
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                )
+                .AddParameter(
+                    "couponid",
+                    couponId,
+                    ParameterType.UrlSegment
+                );
+
+
+            conn.ExecuteNonQuery(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+        }
+
+        public static void AddCoupons(this Connection conn,
+                                      IClientState state,
+                                     int basketId, BasketCouponRequestBody basketCouponRequestBody)
+        {
+            var restRequest = new RestRequest("/services/v3/baskets/{basketId}/coupons", Method.POST)
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                ).AddBody(basketCouponRequestBody);
 
 
             conn.ExecuteNonQuery(

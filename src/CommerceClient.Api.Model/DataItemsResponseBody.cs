@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CommerceClient.Api.Model.Misc;
+using System.Collections.Generic;
 
 namespace CommerceClient.Api.Model
 {

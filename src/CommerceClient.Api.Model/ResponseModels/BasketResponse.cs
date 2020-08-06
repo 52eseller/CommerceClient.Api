@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommerceClient.Api.Model.JsonConverters;
+using CommerceClient.Api.Model.Misc;
 using Newtonsoft.Json;
 
 namespace CommerceClient.Api.Model

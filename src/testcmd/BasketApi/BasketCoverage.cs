@@ -55,5 +55,20 @@ namespace CommerceClient.Api.Coverage.BasketApi
         {
             _connection.CheckoutBasket(_clientState, basketId);
         }
+
+        public void TakeBasketOwnerShip(int basketId)
+        {
+            _connection.TakeBasketOwnerShip(_clientState, basketId);
+        }
+
+        public void RemoveCoupon(int basketId, string couponId)
+        {
+            _connection.RemoveCoupon(_clientState, basketId, couponId);
+        }
+
+        public void RemoveCoupons(int basketId)
+        {
+            _connection.RemoveCoupons(_clientState, basketId);
+        }
     }
 }

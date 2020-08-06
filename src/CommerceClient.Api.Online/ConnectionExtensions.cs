@@ -17,7 +17,8 @@ namespace CommerceClient.Api.Online
         None = 0,
         Auth = 1 << 0,
         Ticket = 1 << 1,
-        Hmac = 1 << 2
+        Hmac = 1 << 2,
+        Misc = 1 << 3
     }
 
     public static class ConnectionExtensions
@@ -338,43 +339,44 @@ namespace CommerceClient.Api.Online
                     ParameterType.HttpHeader
                 );
             }
-
-            if (state?.LanguageId != null)
+            if ((authHint & Includes.Misc)!=0)
             {
-                request.AddParameter(
-                    "langId",
-                    state.LanguageId,
-                    ParameterType.QueryString
-                );
-            }
+                if (state?.LanguageId != null)
+                {
+                    request.AddParameter(
+                        "langId",
+                        state.LanguageId,
+                        ParameterType.QueryString
+                    );
+                }
 
-            if (state?.CurrencyId != null)
-            {
-                request.AddParameter(
-                    "currId",
-                    state.CurrencyId,
-                    ParameterType.QueryString
-                );
-            }
+                if (state?.CurrencyId != null)
+                {
+                    request.AddParameter(
+                        "currId",
+                        state.CurrencyId,
+                        ParameterType.QueryString
+                    );
+                }
 
-            if (state?.CountryId != null)
-            {
-                request.AddParameter(
-                    "counId",
-                    state.CountryId,
-                    ParameterType.QueryString
-                );
-            }
+                if (state?.CountryId != null)
+                {
+                    request.AddParameter(
+                        "counId",
+                        state.CountryId,
+                        ParameterType.QueryString
+                    );
+                }
 
-            if (state?.LocationId != null)
-            {
-                request.AddParameter(
-                    "locId",
-                    state.LocationId,
-                    ParameterType.QueryString
-                );
+                if (state?.LocationId != null)
+                {
+                    request.AddParameter(
+                        "locId",
+                        state.LocationId,
+                        ParameterType.QueryString
+                    );
+                }
             }
-
 
             if ((authHint & Includes.Hmac) != 0)
             {

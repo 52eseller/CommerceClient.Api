@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using CommerceClient.Api.Model.Misc;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CommerceClient.Api.Model
+namespace CommerceClient.Api.Model.Misc
 {
     public class ValidationMessageResponse
     {
@@ -41,15 +42,5 @@ namespace CommerceClient.Api.Model
         /// Together with kind, this identifies exactly what item caused the message.
         /// </summary>
         public string Reference { get; set; }
-    }
-
-    public enum Severity
-    {
-        Debug = 0,
-        Info = 1,
-        Warning = 2,
-        Error = 3,
-        Fatal = 4,
-        Security = 10
     }
 }

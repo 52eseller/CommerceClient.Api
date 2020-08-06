@@ -1,9 +1,6 @@
-﻿using ProtoBuf;
+﻿using JetBrains.Annotations;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace CommerceClient.Api.Model.Types
 {
@@ -11,7 +8,6 @@ namespace CommerceClient.Api.Model.Types
     /// Key identifying a single Country
     /// </summary>
     [Serializable]
-    [ProtoContract]
     public struct CountryKey : IComparable<CountryKey>, IConvertible, ISerializable, IEquatable<CountryKey>
     {
         public CountryKey(int countryID) => _CountryID = countryID;
@@ -35,7 +31,7 @@ namespace CommerceClient.Api.Model.Types
             }
         }
 
-        [ProtoMember(1)] private readonly int _CountryID;
+        private readonly int _CountryID;
 
         public int CountryID => _CountryID;
 

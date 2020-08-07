@@ -1,4 +1,4 @@
-﻿namespace CommerceClient.Api.Model.RequestModels.Basket
+﻿namespace CommerceClient.Api.Model.RequestModels
 {
     public class BasketCouponRequestBody
     {

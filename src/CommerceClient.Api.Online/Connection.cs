@@ -40,7 +40,6 @@ namespace CommerceClient.Api.Online
         public bool IgnoreSslErrors { get; set; } = true;
         public TimeSpan RequestTimeout { get; set; } = TimeSpan.FromSeconds(30);
         public string HostOverride { get; set; }
-        public string Authentication { get; set; }
         internal IRestClient Client { get; }
     }
 }

@@ -3,7 +3,7 @@ using CommerceClient.Api.Model.JsonConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CommerceClient.Api.Model.RequestModels.Basket
+namespace CommerceClient.Api.Model.RequestModels
 {
     public class BasketLineRequestBody
     {

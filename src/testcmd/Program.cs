@@ -4,9 +4,8 @@ using CommerceClient.Api.Model;
 using CommerceClient.Api.Model.RequestModels;
 using CommerceClient.Api.Online;
 using JetBrains.Annotations;
-using CommerceClient.Api.Coverage.BasketApi;
 
-namespace CommerceClient.Api.Coverage
+namespace testcmd
 {
     class Program
     {
@@ -15,55 +14,53 @@ namespace CommerceClient.Api.Coverage
             Console.WriteLine("Hello World!");
             Console.Write("Hit return to start.");
             Console.ReadLine();
-            int basketId = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings.Get("basketId"));
-            new BasketCoverage().DeleteBasket(basketId);
-            //new BasketCoverage().CreateNewBasket();
-            //var cnn = new Connection(System.Configuration.ConfigurationManager.AppSettings.Get("hostname"))
-            //{
-            //    HostOverride = System.Configuration.ConfigurationManager.AppSettings.Get("hostoverride")
-            //};
-            //try
-            //{
 
-            //    var clientState = new ClientState();
-            //    var (setHeaders, descriptiveContext) = cnn.GetContext(clientState);
-            //    clientState = clientState.ChangeState(setHeaders);
-            //    clientState.ApiKey = "eseller";
-            //    clientState.ApiSecret = "abc"; // Yes, you guessed correctly - this is not a real production key :)
-            //    LogRequestTest(cnn, clientState);
-            //}
-            //catch (NotFoundException e)
-            //{
-            //    Console.WriteLine();
-            //    Console.WriteLine("Whoops - the resource was not found:");
-            //    Console.WriteLine("=====================");
-            //    Console.WriteLine(e.ErrorResponse?.ToJsonRaw());
-            //}
-            //catch (UnauthorizedException e)
-            //{
-            //    Console.WriteLine();
-            //    Console.WriteLine("Insufficient priviledges:");
-            //    Console.WriteLine("=========================");
-            //    Console.WriteLine(e.Challenge);
-            //    Console.WriteLine("  - Additional info:");
+            var cnn = new Connection(System.Configuration.ConfigurationManager.AppSettings.Get("hostname"))
+            {
+                HostOverride = System.Configuration.ConfigurationManager.AppSettings.Get("hostoverride")
+            };
+            try
+            {
 
-            //    foreach (var eReason in e.Reasons)
-            //    {
-            //        Console.WriteLine($"    - {eReason}");
+                var clientState = new ClientState();
+                var (setHeaders, descriptiveContext) = cnn.GetContext(clientState);
+                clientState = clientState.ChangeState(setHeaders);
+                clientState.ApiKey = "eseller";
+                clientState.ApiSecret = "abc"; // Yes, you guessed correctly - this is not a real production key :)
+                LogRequestTest(cnn, clientState);
+            }
+            catch (NotFoundException e)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Whoops - the resource was not found:");
+                Console.WriteLine("=====================");
+                Console.WriteLine(e.ErrorResponse?.ToJsonRaw());
+            }
+            catch (UnauthorizedException e)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Insufficient priviledges:");
+                Console.WriteLine("=========================");
+                Console.WriteLine(e.Challenge);
+                Console.WriteLine("  - Additional info:");
 
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine();
-            //    Console.WriteLine("Something went wrong:");
-            //    Console.WriteLine("=====================");
-            //    Console.WriteLine(e.ToString());
-            //}
+                foreach (var eReason in e.Reasons)
+                {
+                    Console.WriteLine($"    - {eReason}");
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Something went wrong:");
+                Console.WriteLine("=====================");
+                Console.WriteLine(e.ToString());
+            }
 
 
-            //Console.Write("Hit return to exit.");
-            //Console.ReadLine();
+            Console.Write("Hit return to exit.");
+            Console.ReadLine();
 
         }
 

@@ -309,13 +309,6 @@ namespace CommerceClient.Api.Online
                     conn.HostOverride
                 );
             }
-            if (conn.Authentication != null)
-            {
-                request.AddHeader(
-                    "X-Authentication",
-                    conn.Authentication
-                );
-            }
         }
 
         /// <summary>

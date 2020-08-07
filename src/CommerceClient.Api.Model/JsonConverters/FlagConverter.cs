@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace CommerceClient.Api.Model.JsonConverters
@@ -14,6 +15,7 @@ namespace CommerceClient.Api.Model.JsonConverters
         /// <inheritdoc />
         public override bool CanRead => true;
 
+        [CanBeNull]
         public override object ReadJson(
             JsonReader reader,
             Type objectType,
@@ -21,26 +23,7 @@ namespace CommerceClient.Api.Model.JsonConverters
             JsonSerializer serializer
         )
         {
-            if (reader == null)
-            {
-                throw new ArgumentNullException(nameof(reader));
-            }
-
-            if (objectType == null)
-            {
-                throw new ArgumentNullException(nameof(objectType));
-            }
-
-            if (existingValue == null)
-            {
-                throw new ArgumentNullException(nameof(existingValue));
-            }
-
-            if (serializer == null)
-            {
-                throw new ArgumentNullException(nameof(serializer));
-            }
-
+            var jsonName = reader.Path;
             if (objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 objectType = objectType.GetGenericArguments().First();
@@ -68,11 +51,21 @@ namespace CommerceClient.Api.Model.JsonConverters
                 strValue = reader.Value as string ?? string.Empty;
             }
 
-            return Enum.Parse(
-                objectType,
-                strValue,
-                true
-            );
+            try
+            {
+                return Enum.Parse(
+                    objectType,
+                    strValue,
+                    true
+                );
+            }
+            catch (Exception e)
+            {
+                throw new Exception(
+                    $"{jsonName} has invalid value(s).",
+                    e
+                );
+            }
         }
 
         /// <inheritdoc />

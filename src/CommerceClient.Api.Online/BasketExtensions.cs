@@ -275,7 +275,9 @@ namespace CommerceClient.Api.Online
 
         public static NoContentResponse DeleteBasket(this Connection conn, IClientState state, int basketId)
         {
+#pragma warning disable CA1305 // Specify IFormatProvider
             var restRequest = new RestRequest(string.Format("{0}/{1}", "/services/v3/baskets", basketId))
+#pragma warning restore CA1305 // Specify IFormatProvider
             {
                 Method = Method.DELETE
             };
@@ -495,7 +497,7 @@ namespace CommerceClient.Api.Online
                     "basketId",
                     basketId,
                     ParameterType.UrlSegment
-                ).AddBody(basketCouponRequestBody);
+                ).AddJsonBody(basketCouponRequestBody);
 
 
             conn.ExecuteNonQuery(

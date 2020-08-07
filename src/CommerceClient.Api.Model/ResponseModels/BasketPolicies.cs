@@ -49,6 +49,8 @@ namespace CommerceClient.Api.Model
         /// </summary>
         Deletable = 1 << 8,
 
+        Active = 1<<9,
+
         /// <summary>
         /// Indicates that basket is accessible in the context.
         /// </summary>

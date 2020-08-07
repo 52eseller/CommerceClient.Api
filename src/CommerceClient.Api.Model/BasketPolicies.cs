@@ -50,6 +50,11 @@ namespace CommerceClient.Api.Model
         Deletable = 1 << 8,
 
         /// <summary>
+        /// Active is to be regarded as "the basket currently in use".
+        /// </summary>
+        Active = 1 << 9,
+
+        /// <summary>
         /// Indicates that basket is accessible in the context.
         /// </summary>
         ShopFrontAccess = Owner | Supervisor | Rogue,

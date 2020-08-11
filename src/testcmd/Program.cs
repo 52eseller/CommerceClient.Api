@@ -3,7 +3,6 @@ using System.Reflection;
 using CommerceClient.Api.Model;
 using CommerceClient.Api.Model.RequestModels;
 using CommerceClient.Api.Online;
-using JetBrains.Annotations;
 using CommerceClient.Api.Coverage.BasketApi;
 using CommerceClient.Api.Model.RequestModels.Basket;
 

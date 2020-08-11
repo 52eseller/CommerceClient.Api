@@ -23,6 +23,8 @@ namespace CommerceClient.Api.Coverage
                 _clientState = _clientState.ChangeState(setHeaders);
                 _clientState.ApiKey = "eseller";
                 _clientState.ApiSecret = "abc"; // Yes, you guessed correctly - this is not a real production key :)
+
+                //Commented only for avoiding adding in development
                // LogRequestTest(_connection, _clientState);
             }
             catch (NotFoundException e)

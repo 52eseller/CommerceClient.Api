@@ -104,14 +104,14 @@ namespace CommerceClient.Api.Online
         /// <param name="state"></param>
         /// <param name="basketId"></param>
         /// <param name="basketLineId"></param>
-        public static void DeleteBasketLine(
+        public static bool DeleteBasketLine(
             this Connection conn,
             ClientState state,
             int basketId,
             int basketLineId
         )
         {
-            conn.Execute<object>(
+           var (_, success) = conn.ExecuteNonQuery<bool>(
                 conn.CreateRestRequestJson(
                         Method.DELETE,
                         "/services/v3/baskets/{basketId}/lines/{lineId}"
@@ -129,8 +129,36 @@ namespace CommerceClient.Api.Online
                 state,
                 Includes.Auth
             );
+            return success;
         }
 
+
+        /// <summary>
+        /// Removes a line from basket by its id.
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="state"></param>
+        /// <param name="basketId"></param>
+        public static bool DeleteBasketLines(
+            this Connection conn,
+            ClientState state,
+            int basketId
+        )
+        {
+            var restRequest = new RestRequest("/services/v3/baskets/{basketId}/lines}", Method.DELETE)
+               .AddParameter(
+                   "basketId",
+                   basketId,
+                   ParameterType.UrlSegment
+               );
+
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+               restRequest,
+               state,
+               Includes.Auth
+           );
+            return success;
+        }
         /// <summary>
         /// Gets detailed information on a specific basket.
         /// </summary>
@@ -273,7 +301,7 @@ namespace CommerceClient.Api.Online
             return response.Data.Items;
         }
 
-        public static NoContentResponse DeleteBasket(this Connection conn, IClientState state, int basketId)
+        public static bool DeleteBasket(this Connection conn, IClientState state, int basketId)
         {
 #pragma warning disable CA1305 // Specify IFormatProvider
             var restRequest = new RestRequest(string.Format("{0}/{1}", "/services/v3/baskets", basketId))
@@ -283,16 +311,15 @@ namespace CommerceClient.Api.Online
             };
 
 
-            var (_, response) = conn.Execute<NoContentResponse>(
-                restRequest,
-                state,
-                Includes.Auth
-            );
-
-            return response;
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                 restRequest,
+                 state,
+                 Includes.Auth
+             );
+            return success;
         }
 
-        public static void UpdateSellTo(
+        public static bool UpdateSellTo(
             this Connection conn,
             IClientState state,
             int basketId,
@@ -308,16 +335,15 @@ namespace CommerceClient.Api.Online
                     basketId,
                     ParameterType.UrlSegment
                 );
-
-
-            conn.ExecuteNonQuery(
-                restRequest,
-                state,
-                Includes.Auth
-            );
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                                     restRequest,
+                                     state,
+                                     Includes.Auth
+                                 );
+            return success;
         }
 
-        public static void UpdateShipTo(this Connection conn,
+        public static bool UpdateShipTo(this Connection conn,
                                         IClientState state,
                                         int basketId,
                                         AddressShipToRequest shipToRequest)
@@ -331,16 +357,15 @@ namespace CommerceClient.Api.Online
                     basketId,
                     ParameterType.UrlSegment
                 );
-
-
-            conn.ExecuteNonQuery(
-                restRequest,
-                state,
-                Includes.Auth
-            );
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                                     restRequest,
+                                     state,
+                                     Includes.Auth
+                                 );
+            return success;
         }
 
-        public static void UpdateBasketAnnotation(this Connection conn,
+        public static bool UpdateBasketAnnotation(this Connection conn,
                                 IClientState state,
                                 int basketId,
                                  BasketAnnotationRequest annotation)
@@ -354,13 +379,12 @@ namespace CommerceClient.Api.Online
                     basketId,
                     ParameterType.UrlSegment
                 );
-
-
-            conn.ExecuteNonQuery(
-                restRequest,
-                state,
-                Includes.Auth
-            );
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                                     restRequest,
+                                     state,
+                                     Includes.Auth
+                                 );
+            return success;
         }
 
         public static List<ValidationMessageResponse> MergeBasket(this Connection conn,
@@ -386,7 +410,27 @@ namespace CommerceClient.Api.Online
             );
             return response;
         }
-        public static void DeleteAllBasketUserValue(this Connection conn,
+
+        public static bool CreateUserKeyValue(this Connection conn,
+                 IClientState state,
+                 int basketId,
+                  BasketUserValueRequest basketUserValueRequest)
+        {
+            var restRequest = basketUserValueRequest.CreateRestRequestJson(Method.POST,
+                            "/services/v3/baskets/{basketId}/uservalues")
+                            .AddParameter("basketId",
+                                basketId,
+                                ParameterType.UrlSegment);
+
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                                     restRequest,
+                                     state,
+                                     Includes.Auth
+                                 );
+            return success;
+        }
+
+        public static bool DeleteAllBasketUserValue(this Connection conn,
                          IClientState state,
                          int basketId, string uservaluekey)
         {
@@ -401,15 +445,35 @@ namespace CommerceClient.Api.Online
                     ParameterType.UrlSegment
                 );
 
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                           restRequest,
+                           state,
+                           Includes.Auth
+                       );
+            return success;
+        }
 
-            conn.ExecuteNonQuery(
+        public static bool DeleteAllBasketUserValues(this Connection conn,
+                 IClientState state,
+                 int basketId)
+        {
+            var restRequest = new RestRequest("/services/v3/baskets/{basketId}/uservalues/", Method.DELETE)
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                );
+
+
+           var (_, success) =  conn.ExecuteNonQuery<bool>(
                 restRequest,
                 state,
                 Includes.Auth
             );
+            return success;
         }
 
-        public static void CheckoutBasket(this Connection conn,
+        public static bool CheckoutBasket(this Connection conn,
                  IClientState state,
                  int basketId)
         {
@@ -420,14 +484,15 @@ namespace CommerceClient.Api.Online
                     ParameterType.UrlSegment
                 );
 
-            conn.ExecuteNonQuery(
-                restRequest,
-                state,
-                Includes.Auth
-            );
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                                  restRequest,
+                                  state,
+                                  Includes.Auth
+                              );
+            return success;
         }
 
-        public static void TakeBasketOwnerShip(this Connection conn,
+        public static bool TakeBasketOwnerShip(this Connection conn,
                  IClientState state,
                  int basketId)
         {
@@ -437,16 +502,15 @@ namespace CommerceClient.Api.Online
                     basketId,
                     ParameterType.UrlSegment
                 );
-
-
-            conn.ExecuteNonQuery(
-                restRequest,
-                state,
-                Includes.Auth
-            );
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                         restRequest,
+                         state,
+                         Includes.Auth
+                     );
+            return success;
         }
 
-        public static void RemoveCoupons(this Connection conn,
+        public static bool RemoveCoupons(this Connection conn,
          IClientState state,
          int basketId)
         {
@@ -457,15 +521,15 @@ namespace CommerceClient.Api.Online
                     ParameterType.UrlSegment
                 );
 
-
-            conn.ExecuteNonQuery(
-                restRequest,
-                state,
-                Includes.Auth
-            );
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                           restRequest,
+                           state,
+                           Includes.Auth
+                       );
+            return success;
         }
 
-        public static void RemoveCoupon(this Connection conn,
+        public static bool RemoveCoupon(this Connection conn,
         IClientState state, int basketId, string couponId)
         {
             var restRequest = new RestRequest("/services/v3/baskets/{basketId}/coupons/{couponid}", Method.DELETE)
@@ -479,16 +543,15 @@ namespace CommerceClient.Api.Online
                     couponId,
                     ParameterType.UrlSegment
                 );
-
-
-            conn.ExecuteNonQuery(
-                restRequest,
-                state,
-                Includes.Auth
-            );
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                           restRequest,
+                           state,
+                           Includes.Auth
+                       );
+            return success;
         }
 
-        public static void AddCoupons(this Connection conn,
+        public static bool AddCoupons(this Connection conn,
                                       IClientState state,
                                      int basketId, BasketCouponRequestBody basketCouponRequestBody)
         {
@@ -500,11 +563,12 @@ namespace CommerceClient.Api.Online
                 ).AddJsonBody(basketCouponRequestBody);
 
 
-            conn.ExecuteNonQuery(
-                restRequest,
-                state,
-                Includes.Auth
-            );
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                               restRequest,
+                               state,
+                               Includes.Auth
+                           );
+            return success;
         }
     }
     

@@ -46,6 +46,11 @@ namespace CommerceClient.Api.Coverage.BasketApi
             _connection.DeleteAllBasketUserValue(_clientState, basketId, uservaluekey);
         }
 
+        public void DeleteAllBasketUserValues(int basketId)
+        {
+            _connection.DeleteAllBasketUserValues(_clientState, basketId);
+        }
+
         public void GetBasketStatus(int basketId)
         {
             _connection.GetBasketStatus(_clientState, basketId);
@@ -69,6 +74,26 @@ namespace CommerceClient.Api.Coverage.BasketApi
         public void RemoveCoupons(int basketId)
         {
             _connection.RemoveCoupons(_clientState, basketId);
+        }
+
+        public void DeleteBasketLines(int basketId)
+        {
+            _connection.DeleteBasketLines(_clientState, basketId);
+        }
+
+        public void DeleteBasketLine(int basketId, int lineId)
+        {
+            _connection.DeleteBasketLine(_clientState, basketId, lineId);
+        }
+
+        public void CreateUserKeyValue(int basketId, BasketUserValueRequest basketUserValueRequest)
+        {
+            _connection.CreateUserKeyValue(_clientState, basketId, basketUserValueRequest);
+        }
+
+        public void GetState(int basketId)
+        {
+            _connection.GetBasketState(_clientState, basketId);
         }
     }
 }

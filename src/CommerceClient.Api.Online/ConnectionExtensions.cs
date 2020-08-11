@@ -156,6 +156,125 @@ namespace CommerceClient.Api.Online
             return default;
         }
 
+        public static (List<HeaderSetMessage> HeaderSetMessages, bool IsSuccess) ExecuteNonQuery<T>(
+    this Connection conn,
+    IRestRequest restRequest,
+    IClientState state,
+    Includes authHint
+)
+    where T : new()
+        {
+            if (conn == null)
+            {
+                throw new ArgumentNullException(nameof(conn));
+            }
+
+            if (restRequest == null)
+            {
+                throw new ArgumentNullException(nameof(restRequest));
+            }
+
+            if (state == null)
+            {
+                throw new ArgumentNullException(nameof(state));
+            }
+
+            if (conn == null)
+            {
+                throw new ArgumentNullException(nameof(conn));
+            }
+
+            var request =
+                restRequest;
+
+            PrepareRequest(
+                conn,
+                request
+            );
+
+            AddContextToRequest(
+                request,
+                state,
+                authHint
+            );
+
+            var sw = Stopwatch.StartNew();
+            conn.Client.FailOnDeserializationError = false;
+            var response = conn.Client.Execute<T>(request);
+            sw.Stop();
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                if (response.ErrorException == null)
+                {
+                    var errResponse = conn.Client.Deserialize<ErrorResponseBase>(response);
+                    if (errResponse.Data != null)
+                    {
+                        throw new NotFoundException(
+                            response.StatusCode,
+                            errResponse.Data,
+                            errResponse.ErrorMessage
+                        );
+                    }
+
+                    throw new NotFoundException(response.StatusCode.ToString());
+                }
+
+                throw new NotFoundException(
+                    response.StatusCode,
+                    null,
+                    response.StatusCode.ToString(),
+                    response.ErrorException
+                );
+            }
+
+            if (response.ErrorException != null)
+            {
+                const string message = "Error retrieving response.  Check inner details for more info.";
+                throw new Exception(
+#pragma warning disable CA1303 // Do not pass literals as localized parameters Localization!
+                    message,
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                    response.ErrorException
+                );
+            }
+
+            if (response.IsSuccessful)
+            {
+                var headers = BuildSetHeaders(response);
+
+                return (headers, true);
+            }
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedException(
+                    response.StatusCode,
+                    response.Headers.Where(x => x.Type == ParameterType.HttpHeader).Select(x => $"{x.Name}: {x.Value}"),
+                    response.Headers.Where(
+                            x => x.Type == ParameterType.HttpHeader &&
+                                 x.Name.Equals(
+                                     "WWW-Authenticate",
+                                     StringComparison.OrdinalIgnoreCase
+                                 )
+                        )
+                        .Select(x => $"{x.Name}: {x.Value}")
+                        .FirstOrDefault()
+                );
+            }
+
+            var e = conn.Client.Deserialize<ErrorResponseBase>(response);
+            if (e?.Data != null)
+            {
+                throw new ApiException(
+                    response.StatusCode,
+                    e.Data
+                );
+            }
+
+            return default;
+        }
+
         /// <summary>
         /// Executes a rest request, returning the response. If the request fails, an exception is thrown.
         /// Look at the exception Data property with key 'ErrorResponse' to find

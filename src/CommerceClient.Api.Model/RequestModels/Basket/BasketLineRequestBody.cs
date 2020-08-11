@@ -1,5 +1,6 @@
 ﻿using System;
 using CommerceClient.Api.Model.JsonConverters;
+using CommerceClient.Api.Model.ResponseModels.Basket;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

@@ -1,4 +1,4 @@
-﻿namespace CommerceClient.Api.Model
+﻿namespace CommerceClient.Api.Model.ResponseModels.Basket
 {
     /// <summary>
     /// Enum controlling how to alter default basket line creation behaviour (update or new)

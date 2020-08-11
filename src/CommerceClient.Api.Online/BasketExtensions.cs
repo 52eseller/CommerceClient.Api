@@ -4,6 +4,7 @@ using CommerceClient.Api.Model.Misc;
 using CommerceClient.Api.Model.RequestModels;
 using CommerceClient.Api.Model.RequestModels.Basket;
 using CommerceClient.Api.Model.ResponseModels;
+using CommerceClient.Api.Model.ResponseModels.Basket;
 using RestSharp;
 
 namespace CommerceClient.Api.Online

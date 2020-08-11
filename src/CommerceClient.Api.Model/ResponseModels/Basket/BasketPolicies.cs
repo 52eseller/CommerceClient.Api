@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommerceClient.Api.Model
+namespace CommerceClient.Api.Model.ResponseModels.Basket
 {
     [Flags]
     public enum BasketPolicies

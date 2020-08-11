@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CommerceClient.Api.Model
+namespace CommerceClient.Api.Model.ResponseModels.Basket
 {
     public class BasketFeeResponse
     {

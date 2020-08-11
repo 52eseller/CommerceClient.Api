@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CommerceClient.Api.Model
+namespace CommerceClient.Api.Model.ResponseModels.Basket
 {
     public class BasketRequisiteResponse
     {

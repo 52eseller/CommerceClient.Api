@@ -106,6 +106,7 @@ namespace CommerceClient.Api.Online
             this Connection conn,
             IClientState state,
             string searchString,
+            IEnumerable<int> imageSizeTypes,
             int? menuId,
             string sortOption,
             int? page,
@@ -114,14 +115,30 @@ namespace CommerceClient.Api.Online
         )
         {
             var restRequest = conn.CreateRestRequestJson(
-                    Method.GET,
-                    "/services/v3/products/list"
-                )
-                .AddParameter(
+                Method.GET,
+                "/services/v3/products/list"
+            );
+               
+
+            if (imageSizeTypes != null)
+            {
+                restRequest.AddParameter(
+                    "imagesizetypeids",
+                    string.Join(
+                        ",",
+                        imageSizeTypes
+                    ),
+                    ParameterType.QueryString
+                );
+            }
+            else
+            {
+                restRequest.AddParameter(
                     "imagesizetypeids",
                     1,
                     ParameterType.QueryString
                 );
+            }
 
             if (searchString.ToNullIfWhite() != null)
             {

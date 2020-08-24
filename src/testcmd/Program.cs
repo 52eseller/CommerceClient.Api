@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.ServiceModel.Description;
 using CommerceClient.Api.Model;
 using CommerceClient.Api.Model.RequestModels;
 using CommerceClient.Api.Online;
 using CommerceClient.Api.Coverage.BasketApi;
+using CommerceClient.Api.Coverage.ProductApi;
 using CommerceClient.Api.Model.RequestModels.Basket;
 
 namespace CommerceClient.Api.Coverage
@@ -24,7 +29,26 @@ namespace CommerceClient.Api.Coverage
             //new BasketCoverage().CreateNewBasket();
             //new BasketCoverage().UpdateShipToAddress(basketId, addressShipToRequest);
             //new BasketCoverage().DeleteAllBasketUserValues(basketId);
-      
+
+            // Product Coverage Testing
+            //var searchFor = "Box";
+            //var imageSizeTypeID = new List<int>();
+            //imageSizeTypeID.Add(58);
+
+            //int? menuID = null;
+            //new ProductCoverage().SearchForProduct(searchFor, imageSizeTypeID, menuID);
+
+            //var itemKey = new ItemKey(423305, TypeOfItem.Product);
+            //var itemKeys = new List<ItemKey>();
+            //itemKeys.Add(itemKey);
+
+            //var imageSizeTypeID = new List<int>();
+            //imageSizeTypeID.Add(1);
+
+            //new ProductCoverage().GetSpecificItemById(itemKeys, imageSizeTypeID);
+
+
+
             Console.Write("Hit return to exit.");
             Console.ReadLine();
 

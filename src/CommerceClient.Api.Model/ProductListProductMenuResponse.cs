@@ -13,6 +13,7 @@ namespace CommerceClient.Api.Model
         public string NavigateText { get; set; }
 
         public string NavigateTarget { get; set; }
+        public string MenuItemId { get; set; }
 
         public string ExtMenuItemId { get; set; }
 

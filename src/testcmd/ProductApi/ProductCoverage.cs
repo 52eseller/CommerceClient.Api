@@ -46,5 +46,27 @@ namespace CommerceClient.Api.Coverage.ProductApi
                 includes
             );
         }
+
+        public void GetAllProductMenus( IEnumerable<int> imagesizetypeids = null,
+            [CanBeNull] string sortOption = null)
+        {
+            _connection.GetAllProductMenus(
+                _clientState,
+                imagesizetypeids,
+                null,
+                sortOption,
+                null
+            );
+        }
+
+        public void GetSpecificProductMenusWithDepth(int menuId, int depth, IEnumerable<int> imagesizetypeids = null)
+        {
+            _connection.GetSpecificProductMenusWithDepth(
+                _clientState,
+                menuId,
+                imagesizetypeids,
+                depth
+            );
+        }
     }
 }

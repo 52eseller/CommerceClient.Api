@@ -57,6 +57,10 @@ namespace CommerceClient.Api.Online
                     "include",
                     "description",
                     ParameterType.QueryString
+                ).AddParameter(
+                    "imagesizetypeids",
+                    "1",
+                    ParameterType.QueryString
                 );
 
 
@@ -186,6 +190,10 @@ namespace CommerceClient.Api.Online
                     "include",
                     "description",
                     ParameterType.QueryString
+                ).AddParameter(
+                    "imagesizetypeids",
+                    "1",
+                    ParameterType.QueryString
                 );
 
 
@@ -290,8 +298,11 @@ namespace CommerceClient.Api.Online
                 "include",
                 "description",
                 ParameterType.QueryString
-            );
-
+            ).AddParameter(
+                    "imagesizetypeids",
+                    "1",
+                    ParameterType.QueryString
+                );
 
             var (_, response) = conn.Execute<DataItemsResponse<BasketResponse>>(
                 restRequest,

@@ -18,7 +18,7 @@ Namespaces included:
 </Description>
     <Copyright>fiftytwo.com</Copyright>
     <PackageTags>fiftytwo, ecommerce, eSeller Cloud, 52ESELLER</PackageTags>
-    <Version>1.0.4</Version>
+    <Version>2.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/52eseller/CommerceClient.Api</PackageProjectUrl>
@@ -26,8 +26,8 @@ Namespaces included:
 Project location has been changed</PackageReleaseNotes>
     <PackageIcon>NugetIcon.png</PackageIcon>
     <RepositoryUrl>https://github.com/52eseller/CommerceClient.Api</RepositoryUrl>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
-    <FileVersion>1.0.4.0</FileVersion>
+    <AssemblyVersion>2.0.1.0</AssemblyVersion>
+    <FileVersion>2.0.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">

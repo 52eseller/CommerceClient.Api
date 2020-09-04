@@ -23,6 +23,9 @@ namespace CommerceClient.Api.Model.JsonConverters
                 case "debug":
                     return Severity.Debug;
 
+                case "lowPri":
+                    return Severity.Debug;
+
                 case "info":
                     return Severity.Info;
 

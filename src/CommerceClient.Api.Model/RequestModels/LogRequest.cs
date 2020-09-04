@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using CommerceClient.Api.Model.JsonConverters;
+using Newtonsoft.Json;
 
 namespace CommerceClient.Api.Model.RequestModels
 {
+    public enum Severity
+    {
+        Debug = 0,
+        Info = 1,
+        Warning = 2,
+        Error = 3,
+        Fatal = 4,
+        Security = 10
+    }
     public class LogRequest
     {
-        #region Constants
+              #region Constants
 
         /// <summary>
         /// Use this keyword whenever timing a call outside application.
@@ -36,6 +46,9 @@ namespace CommerceClient.Api.Model.RequestModels
 
         #endregion
 
+        [JsonConverter(typeof(SeverityConverter))]
+        public Severity Severity { get; set; }
+
         public string Description { get; set; }
         public string Header { get; set; }
 
@@ -56,9 +69,13 @@ namespace CommerceClient.Api.Model.RequestModels
         /// This is not an id of the device, but an id of actual installation of the app on a device.
         /// </summary>
         public string AppInstallationId { get; set; }
-        public string AppName { get; set; }
         /// <summary>
         /// A string that identifies the app issuing the log. 
+        /// </summary>
+        public string AppName { get; set; }
+        /// <summary>
+        /// A string that identifies the the service that is issuing the log. For main app, this is the same as AppName,
+        /// for background services, this is the name of the background service.
         /// </summary>
         public string AppService { get; set; }
         /// <summary>

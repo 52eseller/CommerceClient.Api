@@ -18,7 +18,7 @@ namespace CommerceClient.Api.Online
             var (headerSetMessages, response) = conn.Execute<LogRequest>(
                 logRequest.CreateRestRequestJson(
                     Method.POST,
-                    "/services/v3/logs/test"
+                    "/services/v3/logs"
                 ),
                 state,
                 Includes.Hmac

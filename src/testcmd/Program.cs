@@ -47,6 +47,22 @@ namespace CommerceClient.Api.Coverage
 
             //new ProductCoverage().GetSpecificItemById(itemKeys, imageSizeTypeID);
 
+            //var imageSizeTypeID = new List<int>();
+            //imageSizeTypeID.Add(65);
+
+            //new ProductCoverage().GetAllProductMenus(imageSizeTypeID);
+
+            //var menuId = 21485;
+            //var depth = 3;
+            //var imageSizeTypeID = new List<int>();
+            //imageSizeTypeID.Add(65);
+
+            //new ProductCoverage().GetSpecificProductMenusWithDepth(
+            //    menuId,
+            //    depth,
+            //    imageSizeTypeID
+            //);
+
 
 
             Console.Write("Hit return to exit.");

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommerceClient.Api.Model;
 using CommerceClient.Api.Model.Misc;
 using CommerceClient.Api.Model.RequestModels;
@@ -57,6 +58,10 @@ namespace CommerceClient.Api.Online
                     "include",
                     "description",
                     ParameterType.QueryString
+                ).AddParameter(
+                    "imagesizetypeids",
+                    "240",
+                    ParameterType.QueryString
                 );
 
 
@@ -105,34 +110,30 @@ namespace CommerceClient.Api.Online
         /// <param name="state"></param>
         /// <param name="basketId"></param>
         /// <param name="basketLineId"></param>
-        public static bool DeleteBasketLine(
+        public static void DeleteBasketLine(
             this Connection conn,
             ClientState state,
             int basketId,
             int basketLineId
         )
         {
-           var (_, success) = conn.ExecuteNonQuery<bool>(
-                conn.CreateRestRequestJson(
-                        Method.DELETE,
-                        "/services/v3/baskets/{basketId}/lines/{lineId}"
-                    )
-                    .AddParameter(
-                        "basketId",
-                        basketId,
-                        ParameterType.UrlSegment
-                    )
-                    .AddParameter(
-                        "lineId",
-                        basketLineId,
-                        ParameterType.UrlSegment
-                    ),
-                state,
-                Includes.Auth
-            );
-            return success;
-        }
+            try
+            {
+                var restRequest = new RestRequest(string.Format("{0}/{1}/lines/{2}", "/services/v3/baskets", basketId,basketLineId))
+                {
+                    Method = Method.DELETE
+                };
 
+
+                 conn.ExecuteNonQuery<ValidationMessageResponse>(
+                     restRequest,
+                     state,
+                     Includes.Auth
+                 );
+            }
+            catch (Exception ex) {
+            }
+        }
 
         /// <summary>
         /// Removes a line from basket by its id.
@@ -185,6 +186,10 @@ namespace CommerceClient.Api.Online
                 .AddParameter(
                     "include",
                     "description",
+                    ParameterType.QueryString
+                ).AddParameter(
+                    "imagesizetypeids",
+                    "1",
                     ParameterType.QueryString
                 );
 
@@ -290,8 +295,11 @@ namespace CommerceClient.Api.Online
                 "include",
                 "description",
                 ParameterType.QueryString
-            );
-
+            ).AddParameter(
+                    "imagesizetypeids",
+                    "1",
+                    ParameterType.QueryString
+                );
 
             var (_, response) = conn.Execute<DataItemsResponse<BasketResponse>>(
                 restRequest,

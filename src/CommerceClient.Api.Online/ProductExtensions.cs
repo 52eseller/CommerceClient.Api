@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CommerceClient.Api.Model;
+using CommerceClient.Api.Model.ResponseModels.Menu;
+using JetBrains.Annotations;
 using RestSharp;
 
 namespace CommerceClient.Api.Online
@@ -196,6 +198,132 @@ namespace CommerceClient.Api.Online
 
 
             var (_, response) = conn.Execute<DataProductListResponse<Product<object>>>(
+                restRequest,
+                state,
+                Includes.Ticket
+            );
+
+            return response.Data;
+        }
+
+
+        public static MenuItemsResponseBody<MenuItem> GetAllProductMenus(
+            this Connection conn,
+            IClientState state,
+            [CanBeNull] IEnumerable<int> imagesizetypeids,
+            bool? strict,
+            string include,
+            int? depth
+        )
+        {
+            var restRequest = conn.CreateRestRequestJson(
+                Method.GET,
+                "/services/v3/menus/productmenu"
+            );
+
+
+            if (imagesizetypeids != null)
+            {
+                restRequest.AddParameter(
+                    "imagesizetypeids",
+                    string.Join(
+                        ",",
+                        imagesizetypeids
+                    ),
+                    ParameterType.QueryString
+                );
+            }
+            else
+            {
+                restRequest.AddParameter(
+                    "imagesizetypeids",
+                    1,
+                    ParameterType.QueryString
+                );
+            }
+
+            if (strict != null)
+            {
+                restRequest.AddParameter(
+                    "strict",
+                    strict,
+                    ParameterType.QueryString
+                );
+            }
+
+            if (include.ToNullIfWhite() != null)
+            {
+                restRequest.AddParameter(
+                    "include",
+                    include,
+                    ParameterType.QueryString
+                );
+            }
+
+            if (depth != null)
+            {
+                restRequest.AddParameter(
+                    "depth",
+                    depth,
+                    ParameterType.QueryString
+                );
+            }
+
+            var (_, response) = conn.Execute<MenuItemResponse<MenuItem>>(
+                restRequest,
+                state,
+                Includes.Ticket
+            );
+
+            return response.Data;
+        }
+
+        public static MenuItemsResponseBody<MenuItem> GetSpecificProductMenusWithDepth(
+            this Connection conn,
+            IClientState state,
+            int menuId,
+            [CanBeNull] IEnumerable<int> imagesizetypeids,
+            int depth
+        )
+        {
+            var restRequest = conn.CreateRestRequestJson(
+                Method.GET,
+                "/services/v3/menus/productmenu/"
+            );
+
+            restRequest.AddParameter(
+                "mId",
+                menuId,
+                ParameterType.UrlSegment
+            );
+
+            restRequest.AddParameter(
+                "depth",
+                depth,
+                ParameterType.QueryString
+            );
+
+            if (imagesizetypeids != null)
+            {
+                restRequest.AddParameter(
+                    "imagesizetypeids",
+                    string.Join(
+                        ",",
+                        imagesizetypeids
+                    ),
+                    ParameterType.QueryString
+                );
+            }
+            else
+            {
+                restRequest.AddParameter(
+                    "imagesizetypeids",
+                    1,
+                    ParameterType.QueryString
+                );
+            }
+            
+            var (_, response) = conn.Execute<MenuItemResponse<MenuItem>>(
                 restRequest,
                 state,
                 Includes.Ticket

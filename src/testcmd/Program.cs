@@ -10,6 +10,7 @@ using CommerceClient.Api.Online;
 using CommerceClient.Api.Coverage.BasketApi;
 using CommerceClient.Api.Coverage.ProductApi;
 using CommerceClient.Api.Model.RequestModels.Basket;
+using CommerceClient.Api.Coverage.Registration;
 
 namespace CommerceClient.Api.Coverage
 {
@@ -22,9 +23,9 @@ namespace CommerceClient.Api.Coverage
             Console.ReadLine();
 
             //For testing purpose only:
-
+           // new RegistrationCoverage().Hello();
             //int basketId = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings.Get("basketId"));
-            //new BasketCoverage().DeleteBasket(basketId);
+            //new BasketCoverage().DeleteBasketLine(9598080, 50149172);
             //new BasketCoverage()(basketId);
             //new BasketCoverage().CreateNewBasket();
             //new BasketCoverage().UpdateShipToAddress(basketId, addressShipToRequest);

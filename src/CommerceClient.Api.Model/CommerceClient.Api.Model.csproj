@@ -2,21 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
-    <RootNamespace>CommerceClient.Api.Model</RootNamespace>
-    <Authors>Flemming Rothmann</Authors>
-    <Company>fiftytwo.com</Company>
-    <PackageId>CommerceClient.Api.Model</PackageId>
-    <Product>52eESELLER api client</Product>
-    <Description>Provides a model for 52eESELLER eCommerce v3 api plaform requests and responses.
-</Description>
-    <Copyright>fiftytwo.com</Copyright>
-    <PackageTags>fiftytwo, ecommerce, eSeller Cloud, 52eESELLER</PackageTags>
-    <Version>1.0.0</Version>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/flemmingrothmann/CommerceClient.Api</PackageProjectUrl>
-    <PackageReleaseNotes>Updated model for customer and login responses</PackageReleaseNotes>
-    <PackageIcon>NugetIcon.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">

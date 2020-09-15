@@ -36,8 +36,12 @@ jobs:
       run: dotnet build --configuration Release --no-restore
       
       #
-    - name: Publish CommerceClient.Api to nuget.org
+    - name: Publish CommerceClient.Api.Online to nuget.org
       working-directory: src/CommerceClient.Api.Online
+      run: dotnet nuget push bin\Release\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+      #
+    - name: Publish CommerceClient.Api.Model to nuget.org
+      working-directory: src/CommerceClient.Api.Model
       run: dotnet nuget push bin\Release\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
       
 # No current need to support github nuget packages    

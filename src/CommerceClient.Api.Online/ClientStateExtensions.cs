@@ -9,6 +9,11 @@ namespace CommerceClient.Api.Online
     {
         public static ClientState ChangeState(this ClientState state, List<HeaderSetMessage> setHeaders)
         {
+            if (state is null)
+            {
+                throw new ArgumentNullException(nameof(state));
+            }
+
             var clientContext = new ClientState
             {
                 AuthenticationToken = state.AuthenticationToken,

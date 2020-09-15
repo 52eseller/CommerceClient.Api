@@ -5,20 +5,19 @@
     <RootNamespace>CommerceClient.Api.Online</RootNamespace>
     <Authors>Flemming Rothmann</Authors>
     <Company>fiftytwo.com</Company>
-    <PackageId>CommerceClient.Api</PackageId>
+    <PackageId>CommerceClient.Api.Online</PackageId>
     <Product>52eESELLER api client</Product>
-    <Description>Provides models, methods and extensions for accessing 52ESELLER cloud web shops using v3 api.
+    <Description>Provides methods and extensions for accessing 52ESELLER cloud web shops using v3 api.
 
 The package provides a fast and convenient building block for developing applications centered around the 52ESELLER cloud web shop engine.
 
 Namespaces included:
-- CommerceClient.Api.Model
 - CommerceClient.Api.Online
 
 </Description>
     <Copyright>fiftytwo.com</Copyright>
     <PackageTags>fiftytwo, ecommerce, eSeller Cloud, 52ESELLER</PackageTags>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/52eseller/CommerceClient.Api</PackageProjectUrl>
@@ -26,8 +25,8 @@ Namespaces included:
 Project location has been changed</PackageReleaseNotes>
     <PackageIcon>NugetIcon.png</PackageIcon>
     <RepositoryUrl>https://github.com/52eseller/CommerceClient.Api</RepositoryUrl>
-    <AssemblyVersion>2.0.2.0</AssemblyVersion>
-    <FileVersion>2.0.2.0</FileVersion>
+    <AssemblyVersion>2.0.3.0</AssemblyVersion>
+    <FileVersion>2.0.3.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">

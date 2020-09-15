@@ -119,7 +119,9 @@ namespace CommerceClient.Api.Online
         {
             try
             {
+#pragma warning disable CA1305 // Specify IFormatProvider
                 var restRequest = new RestRequest(string.Format("{0}/{1}/lines/{2}", "/services/v3/baskets", basketId,basketLineId))
+#pragma warning restore CA1305 // Specify IFormatProvider
                 {
                     Method = Method.DELETE
                 };

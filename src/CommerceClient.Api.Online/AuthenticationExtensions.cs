@@ -33,6 +33,29 @@ namespace CommerceClient.Api.Online
             return (headerSetMessages, response.Data);
         }
 
+        public static (List<HeaderSetMessage> HeaderSetMessages, AuthenticationResponse Data)
+        AuthenticateAsSalesPerson(
+        this Connection conn,
+        IClientState state,
+        string userName,
+        string password)
+        {
+            var (headerSetMessages, response) = conn.Execute<DataResponse<AuthenticationResponse>>(
+                new Authenticate
+                {
+                    UserName = userName,
+                    Password = password,
+                    Role = "salesperson"
+                }
+                    .CreateRestRequestJson(
+                        Method.POST,
+                        "/services/v3/auth/authenticate"
+                    ),
+                state,
+                Includes.Auth
+            );
+            return (headerSetMessages, response.Data);
+        }
 
         public static (List<HeaderSetMessage> HeaderSetMessages, AuthenticationResponse Data) AuthenticateAsAnonymous(
             this Connection conn,

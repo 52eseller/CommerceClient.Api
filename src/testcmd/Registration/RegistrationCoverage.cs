@@ -29,5 +29,11 @@ namespace CommerceClient.Api.Coverage.Registration
 
             _connection.Renew(_clientState);
         }
+
+        public void AuthenticateAsSalePerson()
+        {
+
+            _connection.AuthenticateAsSalesPerson(_clientState, "uah", "1234");
+        }
     }
 }

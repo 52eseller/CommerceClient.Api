@@ -64,7 +64,7 @@ namespace CommerceClient.Api.Coverage
             //    imageSizeTypeID
             //);
 
-            new SalesPersonCoverage().GetCustomersForCurrentSalesPerson();
+            //new SalesPersonCoverage().GetCustomersForCurrentSalesPerson();
 
 
             Console.Write("Hit return to exit.");

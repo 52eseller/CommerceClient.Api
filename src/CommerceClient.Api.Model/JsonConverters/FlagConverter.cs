@@ -53,6 +53,9 @@ namespace CommerceClient.Api.Model.JsonConverters
 
             try
             {
+                if (strValue.ToNullIfWhite() == null)
+                    return null;
+
                 return Enum.Parse(
                     objectType,
                     strValue,

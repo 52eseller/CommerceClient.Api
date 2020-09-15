@@ -9,6 +9,7 @@ using CommerceClient.Api.Model.RequestModels;
 using CommerceClient.Api.Online;
 using CommerceClient.Api.Coverage.BasketApi;
 using CommerceClient.Api.Coverage.ProductApi;
+using CommerceClient.Api.Coverage.SalesPersonApi;
 using CommerceClient.Api.Model.RequestModels.Basket;
 
 namespace CommerceClient.Api.Coverage
@@ -63,6 +64,7 @@ namespace CommerceClient.Api.Coverage
             //    imageSizeTypeID
             //);
 
+            new SalesPersonCoverage().GetCustomersForCurrentSalesPerson();
 
 
             Console.Write("Hit return to exit.");

@@ -52,7 +52,7 @@ namespace CommerceClient.Api.Online
             var (_, response) = conn.Execute<DataResponse<CustomerForSalesPersonResponse>>(
                 restRequest,
                 state,
-                Includes.Ticket
+                Includes.Auth
             );
 
             return response;

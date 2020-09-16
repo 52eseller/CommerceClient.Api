@@ -95,5 +95,10 @@ namespace CommerceClient.Api.Coverage.BasketApi
         {
             _connection.GetBasketState(_clientState, basketId);
         }
+
+        public void GetCurrencies()
+        {
+            _connection.GetCurrencies(_clientState);
+        }
     }
 }

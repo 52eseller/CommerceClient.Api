@@ -24,13 +24,14 @@ namespace CommerceClient.Api.Coverage
             Console.ReadLine();
 
             //For testing purpose only:
-           new RegistrationCoverage().AuthenticateAsSalePerson();
+           //new RegistrationCoverage().AuthenticateAsSalePerson();
             //int basketId = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings.Get("basketId"));
             //new BasketCoverage().DeleteBasketLine(9598080, 50149172);
             //new BasketCoverage()(basketId);
             //new BasketCoverage().CreateNewBasket();
             //new BasketCoverage().UpdateShipToAddress(basketId, addressShipToRequest);
             //new BasketCoverage().DeleteAllBasketUserValues(basketId);
+            //new BasketCoverage().GetCurrencies();
 
             // Product Coverage Testing
             //var searchFor = "Box";

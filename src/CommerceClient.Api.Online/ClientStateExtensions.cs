@@ -26,7 +26,11 @@ namespace CommerceClient.Api.Online
                 PriceCalculationDate = state.PriceCalculationDate,
                 PriceListId = state.PriceListId,
                 SalesPersonId = state.SalesPersonId,
-                TicketToken = state.TicketToken
+                TicketToken = state.TicketToken,
+                ApiKey = state.ApiKey,
+                ApiSecret = state.ApiSecret,
+                InstallationId = state.InstallationId,
+                VisitorId = state.VisitorId
             };
             if (setHeaders != null)
             {

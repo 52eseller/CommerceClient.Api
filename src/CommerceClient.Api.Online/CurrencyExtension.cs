@@ -8,7 +8,7 @@ namespace CommerceClient.Api.Online
 {
     public static class CurrencyExtension
     {
-        public static DataItemsResponse<Currency> GetCurrencies(
+        public static DataItemsResponseBody<Currency> GetCurrencies(
             this Connection conn,
             IClientState state )
         {
@@ -23,7 +23,7 @@ namespace CommerceClient.Api.Online
                 Includes.Ticket
             );
 
-            return response;
+            return response.Data;
         }
     }
 }

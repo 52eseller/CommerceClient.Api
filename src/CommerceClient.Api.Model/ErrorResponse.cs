@@ -6,6 +6,9 @@ namespace CommerceClient.Api.Model
     public class ErrorResponse
     {
         //public ErrorResponseBody() => Errors = new System.Collections.Generic.List<ApiError>();
+        /// <summary>
+        /// Http status code, i.e. 200 = OK, 500 = Internal Server Error etc
+        /// </summary>
         public int Code { get; set; }
         public string Message { get; set; }
 

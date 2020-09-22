@@ -2,12 +2,20 @@
 {
     public class ApiError
     {
+        /// <summary>
+        /// Severity enumeration
+        /// </summary>
         public int Code { get; set; }
-
+        /// <summary>
+        /// ResultCode enumeration
+        /// </summary>
         public string Reason { get; set; }
 
         public string Message { get; set; }
 
+        /// <summary>
+        /// ErrorCode (text)
+        /// </summary>
         public string Id { get; set; }
 
         public string MoreInfo { get; set; }

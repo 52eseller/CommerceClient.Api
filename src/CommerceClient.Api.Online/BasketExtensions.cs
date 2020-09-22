@@ -581,6 +581,35 @@ namespace CommerceClient.Api.Online
                            );
             return success;
         }
+
+
+        /// <summary>
+        /// Updates basket context such as location, currency and language.
+        /// </summary>
+        public static bool UpdateBasketState(
+            this Connection conn,
+            IClientState state,
+            int basketId,
+            BasketContextRequestBody basketState
+        )
+        {
+            var restRequest = basketState.CreateRestRequestJson(
+                    Method.PUT,
+                    "/services/v3/baskets/{basketId}/state"
+                )
+                .AddParameter(
+                    "basketId",
+                    basketId,
+                    ParameterType.UrlSegment
+                );
+
+            var (_, success) = conn.ExecuteNonQuery<bool>(
+                restRequest,
+                state,
+                Includes.Auth
+            );
+            return success;
+        }
     }
     
 }

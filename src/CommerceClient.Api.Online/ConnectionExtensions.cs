@@ -525,7 +525,8 @@ namespace CommerceClient.Api.Online
                 01,
                 0,
                 0,
-                0
+                0,
+                DateTimeKind.Utc
             );
 
             public IRestRequest Request { get; }
